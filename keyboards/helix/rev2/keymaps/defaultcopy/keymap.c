@@ -397,7 +397,7 @@ void matrix_update(struct CharacterMatrix *dest,
 #define L_RAISE (1<<_RAISE)
 #define L_ADJUST (1<<_ADJUST)
 #define L_ADJUST_TRI (L_ADJUST|L_RAISE|L_LOWER)
-#define L_VIMMOVE (1<<_VIMMMOVE)
+#define L_VIMMOVE (1<<_VIMMOVE)
 
 static void render_logo(struct CharacterMatrix *matrix) {
 
