@@ -392,10 +392,12 @@ void matrix_update(struct CharacterMatrix *dest,
 
 //assign the right code to your layers for OLED display
 #define L_BASE 0
+#define L_QWERTY(1<<_QWERTY)
 #define L_LOWER (1<<_LOWER)
 #define L_RAISE (1<<_RAISE)
 #define L_ADJUST (1<<_ADJUST)
 #define L_ADJUST_TRI (L_ADJUST|L_RAISE|L_LOWER)
+#define L_VIMMOVE (1<<_VIMMMOVE)
 
 static void render_logo(struct CharacterMatrix *matrix) {
 
@@ -432,6 +434,9 @@ void render_status(struct CharacterMatrix *matrix) {
         case L_BASE:
           matrix_write_P(matrix, PSTR("Default"));
           break;
+        case L_QWERTY:
+          matrix_write_P(matrix, PSTR("Qwerty"));
+          break;
         case L_RAISE:
           matrix_write_P(matrix, PSTR("Raise"));
           break;
@@ -441,6 +446,9 @@ void render_status(struct CharacterMatrix *matrix) {
         case L_ADJUST:
         case L_ADJUST_TRI:
           matrix_write_P(matrix, PSTR("Adjust"));
+          break;
+        case L_VIMMOVE:
+          matrix_write_P(matrix, PSTR("VIM move"));
           break;
         default:
           matrix_write(matrix, buf);
