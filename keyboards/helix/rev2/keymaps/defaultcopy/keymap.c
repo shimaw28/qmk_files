@@ -100,12 +100,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       ),
 
   [_QWERTY_WINJP_SHIFT] = LAYOUT( \
-      _______,      _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______, \
-      _______,      _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
-      MO(_WINMOVE), _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
-      KC_LSFT,      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______,  \
-      _______,      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______ \
-      ),
+      LSFT(KC_ESC), LSFT(KC_1), LSFT(KC_2), LSFT(KC_3), LSFT(KC_4), LSFT(KC_5),     LSFT(KC_6), LSFT(KC_7), LSFT(KC_8), LSFT(KC_9), LSFT(KC_0),    LSFT(KC_MINS), \
+      LSFT(KC_TAB), LSFT(KC_Q), LSFT(KC_W), LSFT(KC_E), LSFT(KC_R), LSFT(KC_T),     LSFT(KC_Y), LSFT(KC_U), LSFT(KC_I), LSFT(KC_O), LSFT(KC_P),    LSFT(KC_BSPC), \
+      LSFT(KC_LCTL), LSFT(KC_A), LSFT(KC_S), LSFT(KC_D), LSFT(KC_F), LSFT(KC_G),    LSFT(KC_H), LSFT(KC_J), LSFT(KC_K), LSFT(KC_L), LSFT(KC_SCLN), LSFT(KC_QUOT), LSFT(KC_LSFT), LSFT(KC_Z), LSFT(KC_X), LSFT(KC_C), LSFT(KC_V), LSFT(KC_B), LSFT(KC_LBRC), LSFT(KC_RBRC), LSFT(KC_N), LSFT(KC_M), LSFT(KC_COMM), LSFT(KC_DOT), LSFT(KC_SLSH), LSFT(KC_ENT), LSFT(KC_LCTL), LSFT(ADJUST), LSFT(KC_LALT), LSFT(KC_LGUI), LSFT(EISU), LSFT(LOWER), LSFT(RAISE), LSFT(KC_ENT), LSFT(LSFT_T(KC_SPC)), LSFT(KANA), LSFT(KC_LEFT), LSFT(KC_DOWN), LSFT(KC_UP), LSFT(KC_RGHT)
+    ) ,
 
   [_WINMOVE] = LAYOUT( \
       KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
