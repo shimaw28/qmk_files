@@ -77,11 +77,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `-------------------------------------------------------------------------------------------------'
    */
   [_QWERTY] = LAYOUT( \
-      KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                        KC_6,             KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
-      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                        KC_Y,             KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
-      KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                        KC_H,             KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LBRC, KC_RBRC,   KC_N,             KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
-      KC_LCTL, ADJUST,  KC_LALT, KC_LGUI, ADJUST,  LOWER,   RAISE,   KC_ENT ,   LSFT_T(KC_SPC),   KC_APP,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
+      KC_ESC,  KC_1,          KC_2,    KC_3,    KC_4,    KC_5,                        KC_6,             KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
+      KC_TAB,  KC_Q,          KC_W,    KC_E,    KC_R,    KC_T,                        KC_Y,             KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
+      KC_LCTL, KC_A,          KC_S,    KC_D,    KC_F,    KC_G,                        KC_H,             KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
+      KC_LSFT, KC_Z,          KC_X,    KC_C,    KC_V,    KC_B,    KC_LBRC, KC_RBRC,   KC_N,             KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
+      KC_LCTL, TG(_VIMMOVE),  KC_LALT, KC_LGUI, ADJUST,  LOWER,   RAISE,   KC_ENT ,   LSFT_T(KC_SPC),   KC_APP,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
       ),
 
   [_QWERTY_WIN] = LAYOUT( \
@@ -93,17 +93,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       ),
 
   [_QWERTY_WINJP] = LAYOUT( \
-      _______,                  _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______, \
-      _______,                  _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
-      MO(_WINMOVE),             _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
-      MO(_QWERTY_WINJP_SHIFT),  _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______,  \
-      _______,                  _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______ \
+      _______,                  _______, _______, _______, _______, _______,                             _______,                         _______, _______, _______, _______, JP_MINS, \
+      _______,                  _______, _______, _______, _______, _______,                             _______,                         _______, _______, _______,  _______, _______, \
+      MO(_WINMOVE),             _______, _______, _______, _______, _______,                             _______,                         _______, _______, _______,  JP_SCLN, JP_QUOT, \
+      MO(_QWERTY_WINJP_SHIFT),  _______, _______, _______, _______, _______,       _______, _______,     _______,                         _______, _______, _______,  _______, _______,  \
+      _______,                  _______, _______, _______, _______, _______,       _______, _______,     LT(_QWERTY_WINJP_SHIFT, KC_SPC), _______, _______, _______,  _______, _______ \
       ),
 
   [_QWERTY_WINJP_SHIFT] = LAYOUT( \
-      LSFT(KC_ESC),  LSFT(KC_1),   LSFT(KC_2),    LSFT(KC_3),    LSFT(KC_4), LSFT(KC_5),                                LSFT(KC_6), LSFT(KC_7), LSFT(KC_8),    LSFT(KC_9),   LSFT(KC_0),    LSFT(KC_MINS), \
+      LSFT(KC_ESC),  LSFT(KC_1),   JP_AT,         JP_HASH,       JP_DLR,     JP_PERC,                                   JP_CIRC,    JP_AMPR,    JP_ASTR,       JP_LPRN,      JP_RPRN,       JP_UNDS, \
       LSFT(KC_TAB),  LSFT(KC_Q),   LSFT(KC_W),    LSFT(KC_E),    LSFT(KC_R), LSFT(KC_T),                                LSFT(KC_Y), LSFT(KC_U), LSFT(KC_I),    LSFT(KC_O),   LSFT(KC_P),    LSFT(KC_BSPC), \
-      KC_LCTL,       LSFT(KC_A),   LSFT(KC_S),    LSFT(KC_D),    LSFT(KC_F), LSFT(KC_G),                                LSFT(KC_H), LSFT(KC_J), LSFT(KC_K),    LSFT(KC_L),   LSFT(KC_SCLN), LSFT(KC_QUOT), \
+      KC_LCTL,       LSFT(KC_A),   LSFT(KC_S),    LSFT(KC_D),    LSFT(KC_F), LSFT(KC_G),                                LSFT(KC_H), LSFT(KC_J), LSFT(KC_K),    LSFT(KC_L),   JP_COLN,       JP_DQT, \
       LSFT(KC_LSFT), LSFT(KC_Z),   LSFT(KC_X),    LSFT(KC_C),    LSFT(KC_V), LSFT(KC_B), LSFT(KC_LBRC), LSFT(KC_RBRC),  LSFT(KC_N), LSFT(KC_M), LSFT(KC_COMM), LSFT(KC_DOT), LSFT(KC_SLSH), LSFT(KC_ENT), \
       LSFT(KC_LCTL), LSFT(KC_ENT), LSFT(KC_LALT), LSFT(KC_LGUI), LSFT(ADJUST), LSFT(LOWER), LSFT(RAISE), LSFT(KC_ENT),    LSFT(KC_SPC), LSFT(KC_APP), LSFT(KC_LEFT), LSFT(KC_DOWN), LSFT(KC_UP), LSFT(KC_RGHT)
     ) ,
