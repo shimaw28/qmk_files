@@ -28,6 +28,7 @@ enum layer_number {
     _QWERTY = 0,
     _QWERTY_WIN,
     _QWERTY_WINJP,
+    _QWERTY_WINJP_SHIFT,
     _WINMOVE,
     _COLEMAK,
     _DVORAK,
@@ -94,7 +95,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,      _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______, \
       _______,      _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
       MO(_WINMOVE), _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
-      _______,      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______,  \
+      MO(_QWERTY_WINJP_SHIFT),      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______,  \
+      _______,      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______ \
+      ),
+
+  [_QWERTY_WINJP_SHIFT] = LAYOUT( \
+      _______,      _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______, \
+      _______,      _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
+      MO(_WINMOVE), _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
+      KC_LSFT,      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______,  \
       _______,      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______ \
       ),
 
@@ -420,6 +429,9 @@ void matrix_update(struct CharacterMatrix *dest,
 //assign the right code to your layers for OLED display
 #define L_BASE 0
 #define L_QWERTY (1<<_QWERTY)
+#define L_QWERTY_WIN (1<<_QWERTY_WIN)
+#define L_QWERTY_WINJP (1<<_QWERTY_WINJP)
+#define L_221MOVE (1<<_WINMOVE)
 #define L_LOWER (1<<_LOWER)
 #define L_RAISE (1<<_RAISE)
 #define L_ADJUST (1<<_ADJUST)
@@ -462,8 +474,17 @@ void render_status(struct CharacterMatrix *matrix) {
           matrix_write_P(matrix, PSTR("Default"));
           break;
         case L_QWERTY:
-          matrix_write_P(matrix, PSTR("Qwerty"));
-          break;
+            matrix_write_P(matrix, PSTR("Qwerty"));
+            break;
+        case L_QWERTY_WIN:
+            matrix_write_P(matrix, PSTR("Qwerty Windows"));
+            break;
+        case L_QWERTY_WINJP:
+            matrix_write_P(matrix, PSTR("Qwerty JP Win"));
+            break;
+        case L_221MOVE:
+            matrix_write_P(matrix, PSTR("Win Move"));
+            break;
         case L_RAISE:
           matrix_write_P(matrix, PSTR("Raise"));
           break;
