@@ -47,7 +47,8 @@ enum custom_keycodes {
   EISU,
   KANA,
   RGBRST,
-  VIMMOVE
+  VIMMOVE,
+  WN_SCRN
 };
 
 enum macro_keycodes {
@@ -79,8 +80,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY_WINJP] = LAYOUT( \
       _______,                  _______, _______, _______, _______, _______,                                     _______,                         _______, _______, _______, _______, JP_MINS, \
       _______,                  _______, _______, _______, _______, _______,                                     _______,                         _______, _______, _______,  _______, _______, \
-      MO(_WINMOVE),             _______, _______, _______, _______, _______,                                     _______,                         _______, _______, _______,  JP_SCLN, JP_QUOT, \
-      MO(_QWERTY_WINJP_SHIFT),  _______, _______, _______, _______, _______,  JP_LBRC,                 JP_RBRC,  _______,                         _______, _______, _______,  _______, _______,  \
+      MO(_WINMOVE),             _______, _______, _______, _______, _______,                                     _______,                         _______, _______, _______,  WN_SCRN, JP_QUOT, \
+      KC_LSFT,                  _______, _______, _______, _______, _______,  JP_LBRC,                 JP_RBRC,  _______,                         _______, _______, _______,  _______, _______,  \
       _______,                  _______, _______, _______, _______, _______,  MO(_QWERTY_WINJP_RAISE), _______,  LT(_QWERTY_WINJP_SHIFT, KC_SPC), _______, _______, _______,  _______, _______ \
       ),      
 
@@ -168,23 +169,26 @@ void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    static bool lshift = false;
+    static bool rshift = false;
+
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
-        persistent_default_layer_set(1UL<<_QWERTY);
+          persistent_default_layer_set(1UL << _QWERTY);
       }
       return false;
       break;
     case LOWER:
       if (record->event.pressed) {
-          //not sure how to have keyboard check mode and set it to a variable, so my work around
-          //uses another variable that would be set to true after the first time a reactive key is pressed.
-        if (TOG_STATUS) { //TOG_STATUS checks is another reactive key currently pressed, only changes RGB mode if returns false
-        } else {
-          TOG_STATUS = !TOG_STATUS;
-          #ifdef RGBLIGHT_ENABLE
-            //rgblight_mode(RGBLIGHT_MODE_SNAKE + 1);
-          #endif
+          // not sure how to have keyboard check mode and set it to a variable, so my work around
+          // uses another variable that would be set to true after the first time a reactive key is pressed.
+          if (TOG_STATUS) {  // TOG_STATUS checks is another reactive key currently pressed, only changes RGB mode if returns false
+          } else {
+              TOG_STATUS = !TOG_STATUS;
+        #ifdef RGBLIGHT_ENABLE
+          //rgblight_mode(RGBLIGHT_MODE_SNAKE + 1);
+        #endif
         }
         layer_on(_LOWER);
         update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
@@ -272,6 +276,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           RGB_current_mode = rgblight_config.mode;
         }
       #endif
+      break;
+
+    case WN_SCRN:
+      if (record->event.pressed) {
+        lshift = keyboard_report->mods & MOD_BIT(KC_LSFT);
+        rshift = keyboard_report->mods & MOD_BIT(KC_RSFT);
+        if (lshift || rshift) {
+          if (lshift) unregister_code(KC_LSFT);
+          if (rshift) unregister_code(KC_RSFT);
+          register_code(JP_COLN);
+          unregister_code(JP_COLN);
+          if (lshift) register_code(KC_LSFT);
+          if (rshift) register_code(KC_RSFT);
+        } else {
+          register_code(JP_SCLN);
+          unregister_code(JP_SCLN);
+        }
+      }
+      return false;
       break;
 
     // case VIMMOVE:
