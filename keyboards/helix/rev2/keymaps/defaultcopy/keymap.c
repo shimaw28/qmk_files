@@ -48,7 +48,8 @@ enum custom_keycodes {
   KANA,
   RGBRST,
   VIMMOVE,
-  WN_SCRN
+  WN_SCRN,
+  WN_QUOT
 };
 
 enum macro_keycodes {
@@ -128,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_WINMOVE] = LAYOUT( \
       KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
       KC_TAB,  KC_Q,    KC_W,    KC_END,  KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_UP,    KC_BSPC, \
-      KC_LCTL, KC_HOME, KC_S,    KC_DEL,  KC_RGHT, KC_G,                               KC_BSPC, KC_J,    KC_K,    KC_L,    KANA,   KC_QUOT, \
+      KC_LCTL, KC_HOME, KC_S,    KC_DEL,  KC_RGHT, KC_G,                               KC_BSPC, KC_J,    KC_K,    KC_L,    KC_F10,   KC_QUOT, \
       KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_LEFT,        KC_LBRC, KC_RBRC,   KC_DOWN, KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
       KC_LCTL, ADJUST,  KC_LALT, KC_LGUI, EISU,    LSFT_T(KC_SPC), LOWER,   RAISE,     LSFT_T(KC_SPC),   KANA,    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
       ),      
@@ -297,12 +298,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
       break;
 
-    // case VIMMOVE:
+    // case WN_QUOT:
     //     if (record->event.pressed) {
-    //       persistent_default_layer_set(1UL << _VIMMOVE);
+    //         lshift = keyboard_report->mods & MOD_BIT(KC_LSFT);
+    //         rshift = keyboard_report->mods & MOD_BIT(KC_RSFT);
+    //         if (lshift || rshift) {
+    //             if (lshift) unregister_code(KC_LSFT);
+    //             if (rshift) unregister_code(KC_RSFT);
+    //             register_code(JP_DQT);
+    //             unregister_code(JP_DQT);
+    //             if (lshift) register_code(KC_LSFT);
+    //             if (rshift) register_code(KC_RSFT);
+    //             // register_code(KC_2);
+    //             // unregister_code(KC_2);
+    //         } else {
+    //             register_code(JP_QUOT);
+    //             unregister_code(JP_QUOT);
+    //         }
     //     }
     //     return false;
     //     break;
+
+        // case VIMMOVE:
+        //     if (record->event.pressed) {
+        //       persistent_default_layer_set(1UL << _VIMMOVE);
+        //     }
+        //     return false;
+        //     break;
   }
   return true;
 }
