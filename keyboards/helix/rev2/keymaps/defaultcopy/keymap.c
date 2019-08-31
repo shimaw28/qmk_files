@@ -72,6 +72,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_LCTL, MO(_VIMMOVE),  KC_LALT, KC_LGUI, ADJUST,  LOWER, RAISE,   KC_ENT ,               LSFT_T(KC_SPC),   KC_APP,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
       ),
 
+  [_IOS] = LAYOUT( \
+      _______,      _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______, \
+      _______,      _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
+      MO(_IOSMOVE), _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
+      _______,      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______,  \
+      _______,      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______ \
+      ),
+
   [_QWERTY_WIN] = LAYOUT( \
       _______,      _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______, \
       _______,      _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
@@ -113,11 +121,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
   [_ADJUST] =  LAYOUT( \
-      TO(_VIMMOVE),   TO(_QWERTY), TO(_QWERTY_WIN),  TO(_SUMITOMO),   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, \
-      TO(_VIMMOVE),   RESET,   RGBRST,  _______, _______, _______,                   _______, _______, _______, _______, KC_VOLU, KC_DEL, \
-      _______,        _______, _______, AU_ON,   AU_OFF,  AG_NORM,                   AG_SWAP, KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, _______, \
-      _______,        _______, _______, _______, _______, _______, _______, KC__VOLUP, KC_VOLD, _______, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
-      _______,        _______, _______, _______, _______, _______, _______, KC__VOLDOWN, _______, _______, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD \
+      _______, TO(_QWERTY), TO(_QWERTY_WIN),  TO(_SUMITOMO),   TO(_IOS),   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, \
+      _______, RESET,       RGBRST,           _______,         _______, _______,                   _______, _______, _______, _______, KC_VOLU, KC_DEL, \
+      _______, _______,     _______,          AU_ON,           AU_OFF,  AG_NORM,                   AG_SWAP, KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, _______, \
+      _______, _______,     _______,          _______,         _______, _______, _______, KC__VOLUP, KC_VOLD, _______, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
+      _______, _______,     _______,          _______,         _______, _______, _______, KC__VOLDOWN, _______, _______, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD \
       ),
 
   [_VIMMOVE] =  LAYOUT( \
@@ -125,8 +133,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, _______, _______, _______, _______,                   _______, _______, _______,  _______, _______, _______, \
       _______, _______, _______, _______, _______, _______,                   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______, \
       _______, _______, KC_DEL,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-      ADJUST,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
+      _______,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
       ),
+
+  [_IOSMOVE] =  LAYOUT( \
+    _______, _______,    _______, _______,    _______,  _______,                                 _______, _______, _______, _______, _______, _______, \
+    _______, _______,    _______, LCTL(KC_E), _______,  _______,                                 _______, _______, _______,  _______, KC_UP , _______, \
+    _______, LCTL(KC_A), _______, KC_DEL,     KC_RIGHT, _______,                                 KC_BSPC, KC_DOWN, KC_UP,   KC_RGHT, _______, _______, \
+    _______, _______,    _______, _______,    _______,  KC_LEFT, LCTL(KC_SPACE), LGUI(KC_SPACE), KC_DOWN, _______, _______, _______, _______, _______, \
+    _______,  _______,   _______, _______,    _______,  _______, _______,        _______,        _______, _______, _______, _______, _______, _______ \
+    ),
 
   [_WINMOVE] = LAYOUT( \
       KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
@@ -366,6 +382,8 @@ void matrix_update(struct CharacterMatrix *dest,
 #define L_QWERTY_WIN (1<<_QWERTY_WIN)
 #define L_SUMITOMO (1<<_SUMITOMO)
 #define L_221MOVE (1<<_WINMOVE)
+#define L_IOS (1<<_IOS)
+#define L_IOSMOVE (1<<_IOSMOVE)
 #define L_LOWER (1<<_LOWER)
 #define L_RAISE (1<<_RAISE)
 #define L_ADJUST (1<<_ADJUST)
@@ -427,11 +445,17 @@ void render_status(struct CharacterMatrix *matrix) {
           break;
         case L_ADJUST:
         case L_ADJUST_TRI:
-          matrix_writne_P(matrix, PSTR("Adjust"));
+          matrix_write_P(matrix, PSTR("Adjust"));
           break;
         case L_VIMMOVE:
-          matrix_write_P(matrix, PSTR("VIM move"));
-          break;
+            matrix_write_P(matrix, PSTR("VIM move"));
+            break;
+        case L_IOS:
+            matrix_write_P(matrix, PSTR("iOS"));
+            break;
+        case L_IOSMOVE:
+            matrix_write_P(matrix, PSTR("iOS move"));
+            break;
         default:
           matrix_write(matrix, buf);
     }
