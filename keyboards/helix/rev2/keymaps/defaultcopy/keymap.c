@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TAB,  KC_Q,          KC_W,    KC_E,    KC_R,    KC_T,                                  KC_Y,             KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
       KC_LCTL, KC_A,          KC_S,    KC_D,    KC_F,    KC_G,                                  KC_H,             KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
       KC_LSFT, KC_Z,          KC_X,    KC_C,    KC_V,    KC_B,  LALT(KC_SPACE), LGUI(KC_SPACE), KC_N,             KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
-      KC_LCTL, MO(_VIMMOVE),  KC_LALT, KC_LGUI, ADJUST,  LOWER, RAISE,   KC_ENT ,               LSFT_T(KC_SPC),   KC_APP,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
+      KC_LGUI, MO(_VIMMOVE),  KC_LALT, KC_LGUI, ADJUST,  LOWER, RAISE,   KC_ENT ,               LSFT_T(KC_SPC),   KC_APP,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
       ),
 
   [_IOS] = LAYOUT( \
@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,      _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
       MO(_WINMOVE), _______, _______, _______, _______, _______,                             _______, _______, _______, _______,  _______, _______, \
       _______,      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______,  \
-      _______,      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______ \
+      KC_LCTL,      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______ \
       ),
 
   [_SUMITOMO] = LAYOUT( \
@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,      _______, _______, _______, _______, _______,                                     _______,                         _______, _______, _______,  _______, _______, \
       MO(_WINMOVE), _______, _______, _______, _______, _______,                                     _______,                         _______, _______, _______,  WN_SCRN, JP_QUOT, \
       KC_LSFT,      _______, _______, _______, _______, _______,  KC_GRV,             LGUI(KC_R), _______,                         _______, _______, _______,  _______, _______,  \
-      _______,      _______, _______, _______, _______, _______,  MO(_SUMITOMO_RAISE), _______,  LT(_SUMITOMO_SHIFT, KC_SPC), _______, _______, _______,  _______, _______ \
+      KC_LCTL,      _______, _______, _______, _______, _______,  MO(_SUMITOMO_RAISE), _______,  LT(_SUMITOMO_SHIFT, KC_SPC), _______, _______, _______,  _______, _______ \
       ),      
 
   [_LOWER] = LAYOUT( \
