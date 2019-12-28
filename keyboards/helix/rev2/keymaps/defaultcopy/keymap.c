@@ -31,6 +31,7 @@ enum layer_number {
     _IOS,
     _SUMITOMO,
     _LOWER,
+    _SUMITOMO_LOWER,
     _RAISE,
     _SUMITOMO_RAISE,
     _ADJUST,
@@ -93,38 +94,46 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,      _______, _______, _______, _______, _______,                                     _______,                         _______, _______, _______,  _______, _______, \
       MO(_WINMOVE), _______, _______, _______, _______, _______,                                     _______,                         _______, _______, _______,  WN_SCRN, JP_QUOT, \
       KC_LSFT,      _______, _______, _______, _______, _______,  KC_GRV,             LGUI(KC_R), _______,                         _______, _______, _______,  _______, _______,  \
-      KC_LCTL,      _______, _______, _______, _______, _______,  MO(_SUMITOMO_RAISE), _______,  LT(_SUMITOMO_SHIFT, KC_SPC), _______, _______, _______,  _______, _______ \
+      KC_LCTL,      _______, _______, _______, _______, MO(_SUMITOMO_LOWER),  MO(_SUMITOMO_RAISE), _______,  LT(_SUMITOMO_SHIFT, KC_SPC), _______, _______, _______,  _______, _______ \
       ),      
 
   [_LOWER] = LAYOUT( \
       KC_TILD, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10, KC_F11, \
-      KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_7,    KC_8,    KC_9,    KC_RPRN, KC_DEL, \
-      _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_4,    KC_5,    KC_6,    KC_RCBR, KC_PIPE, \
-      _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_LPRN, KC_RPRN, KC_F12,  KC_1,    KC_2,    KC_3,    KC_END,  _______, \
-      _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_0,    KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY \
+      _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,KC_DEL, \
+      _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   KC_PIPE, \
+      _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F11, KC_F12, KC_F12,  KC_1,    KC_COMM, KC_DOT,  KC_SLASH,  _______, \
+      _______, _______, _______, _______, _______, _______, _______, _______, MO(_RAISE), KC_0,    KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY \
       ),
+
+  [_SUMITOMO_LOWER] = LAYOUT( \
+      _______,      _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______, \
+      _______,  LSFT(KC_1), JP_AT, JP_HASH, JP_DLR, JP_PERC,                            JP_CIRC, JP_AMPR, JP_ASTR, JP_LPRN, JP_RPRN, JP_UNDS, \
+      _______,      KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   KC_PIPE, \
+      _______,      _______, _______, _______, _______, _______,       _______, _______,     _______, _______, _______, _______,  _______, _______,  \
+      _______,      _______, _______, _______, _______, _______,       _______, _______,     MO(_SUMITOMO_RAISE), _______, _______, _______,  _______, _______ \
+      ), 
 
   [_RAISE] = LAYOUT( \
       KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11, \
-      KC_TILD,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_PIPE, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_DEL, \
-      _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, \
-      _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  _______, _______, KC_F12,  _______, _______, KC_PGDN, KC_PGUP, _______, \
+      KC_TILD,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_PIPE, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_DEL, \
+      KC_GRV  , KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,                      KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, \
+      _______, KC_F11,   KC_F12,  _______, _______, _______,  _______, _______, KC_F12,  _______, _______, KC_PGDN, KC_PGUP, _______, \
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY \
       ),
 
   [_SUMITOMO_RAISE] = LAYOUT( \
       JP_GRV,  _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
-      JP_TILD, _______, _______, _______, _______, _______,                   JP_PIPE, JP_UNDS, JP_PLUS, JP_LCBR, JP_RCBR, KC_DEL, \
-      _______, _______, _______, _______, _______, _______,                   _______, JP_MINS, JP_EQL,  JP_LBRC, JP_RBRC, JP_BSLS,\
-      _______, _______, _______, _______, _______, _______,  _______, _______,_______, _______, _______, _______, _______, _______, \
+      JP_TILD, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                   JP_PIPE, JP_UNDS, JP_PLUS, JP_LCBR, JP_RCBR, KC_DEL, \
+      JP_GRV, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,                     _______, JP_MINS, JP_EQL,  JP_LBRC, JP_RBRC, JP_BSLS,\
+      _______, KC_F11, KC_F12, _______, _______, _______,  _______, _______,_______, _______, _______, _______, _______, _______, \
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______\
     ),
 
   [_ADJUST] =  LAYOUT( \
-      _______, TO(_QWERTY), TO(_QWERTY_WIN),  TO(_SUMITOMO),   TO(_IOS),   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, \
+      _______, _______,     _______,          _______,         _______, _______,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, \
       _______, RESET,       RGBRST,           _______,         _______, _______,                   _______, _______, _______, _______, KC_VOLU, KC_DEL, \
       _______, _______,     _______,          AU_ON,           AU_OFF,  AG_NORM,                   AG_SWAP, KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, _______, \
-      _______, _______,     _______,          _______,         _______, _______, _______, KC__VOLUP, KC_VOLD, _______, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
+      _______, TO(_QWERTY), TO(_QWERTY_WIN),  TO(_SUMITOMO),   TO(_IOS), _______, _______, KC__VOLUP, KC_VOLD, _______, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
       _______, _______,     _______,          _______,         _______, _______, _______, KC__VOLDOWN, _______, _______, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD \
       ),
 
