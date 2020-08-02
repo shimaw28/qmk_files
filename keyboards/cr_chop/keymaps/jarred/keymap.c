@@ -17,49 +17,49 @@ extern uint8_t is_master;
 extern rgblight_config_t rgblight_config;
 #endif
 
-#define LAYOUT_crkbd_base( \
+#define LAYOUT_cr_chop_base( \
     K01, K02, K03, K04, K05, K06, K07, K08, K09, K0A, K0B, K0C, \
     K11, K12, K13, K14, K15, K16, K17, K18, K19, K1A, K1B, K1C, \
     K21, K22, K23, K24, K25, K26, K27, K28, K29, K2A, K2B, K2C, \
                    K31, K32, K33, K34, K35, K36 \
   )
 
-#define LAYOUT_crkbd_wrapper(...) LAYOUT(__VA_ARGS__)
+#define LAYOUT_cr_chop_wrapper(...) LAYOUT(__VA_ARGS__)
 
-#define QWERTY_4_CRKBD KC_LCTL, MO(_LW), KC_SPC, KC_ENT, MO(_LW), KC_RALT
+#define QWERTY_4_CRCHOP KC_LCTL, MO(_LW), KC_SPC, KC_ENT, MO(_LW), KC_RALT
 
-#define BLANK_4_CRKBD  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+#define BLANK_4_CRCHOP  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_QW] = LAYOUT_crkbd_wrapper(
+  [_QW] = LAYOUT_cr_chop_wrapper(
     QWERTY_1_12,
     QWERTY_2_12,
     QWERTY_3_12,
     QWERTY_4_DOX
   ),
-  
-  [_LW] = LAYOUT_crkbd_wrapper(
+
+  [_LW] = LAYOUT_cr_chop_wrapper(
     LOWER_1_12,
     LOWER_2_12,
     LOWER_3_12,
     LOWER_4_DOX
   ),
-  
-  [_NV] = LAYOUT_crkbd_wrapper(
+
+  [_NV] = LAYOUT_cr_chop_wrapper(
     NAV_1_12,
     NAV_2_12,
     NAV_3_12,
     NAV_4_DOX
   ),
-  
-  [_NP] = LAYOUT_crkbd_wrapper(
+
+  [_NP] = LAYOUT_cr_chop_wrapper(
     NUMPAD_1_12,
     NUMPAD_2_12,
     NUMPAD_3_12,
     NUMPAD_4_DOX
   ),
-  
-  [_MS] = LAYOUT_crkbd_wrapper(
+
+  [_MS] = LAYOUT_cr_chop_wrapper(
     MOUSE_1_12,
     MOUSE_2_12,
     MOUSE_3_12,
@@ -87,9 +87,9 @@ char matrix_line_str[24];
 
 const char *read_layer_state(void) {
   uint8_t layer = biton32(layer_state);
-  
+
   strcpy(matrix_line_str, "Layer: ");
-  
+
   switch (layer)
   {
     case _QW:
@@ -115,9 +115,9 @@ const char *read_layer_state(void) {
 }
 
 const char *read_usb_state(void) {
-  
+
   strcpy(matrix_line_str, "USB  : ");
-  
+
   switch (USB_DeviceState) {
     case DEVICE_STATE_Unattached:
       strcat(matrix_line_str, "Unattached");

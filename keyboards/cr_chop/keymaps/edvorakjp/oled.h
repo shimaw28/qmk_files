@@ -11,7 +11,7 @@
 extern uint8_t is_master;
 extern bool japanese_mode;
 
-// method prototypes defined in crkbd/lib
+// method prototypes defined in cr_chop/lib
 extern const char *read_logo(void);
 
 const char *read_mode_icon(bool swap);

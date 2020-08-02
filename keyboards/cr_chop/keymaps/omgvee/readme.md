@@ -1,4 +1,4 @@
-# Reade.md for what I want from my HeliDox(CRKBD) layout
+# Reade.md for what I want from my HeliDox(CRCHOP) layout
 ======================================================
 
 
