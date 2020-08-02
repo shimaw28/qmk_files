@@ -1,4 +1,4 @@
-#include "crkbd.h"
+#include "cr_chop.h"
 
 const char *read_logo(void) {
   static char logo[] = {
