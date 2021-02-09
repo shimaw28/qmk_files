@@ -72,3 +72,5 @@ SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
 CUSTOM_MATRIX = yes
 
 DEFAULT_FOLDER = cr_chop/rev1
+
+# TAP_DANCE_ENABLE = yes

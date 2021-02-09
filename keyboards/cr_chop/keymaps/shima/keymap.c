@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "keymap_jp.h"
-
+#include "quantum.h"
+#include "action_layer.h"
 
 extern keymap_config_t keymap_config;
 
@@ -56,6 +57,17 @@ enum macro_keycodes {
   KC_SAMPLEMACRO,
 };
 
+// Tap Dance declarations
+enum {
+    TD_ALT_GUI,
+};
+
+// Tap Dance definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for Escape, twice for Caps Lock
+    [TD_ALT_GUI] = ACTION_TAP_DANCE_DOUBLE(KC_LALT, KC_LGUI),
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT( \
      KC_ESC,         KC_Q,  KC_W,  KC_E,  KC_R,    KC_T,                                                 KC_Y,           KC_U,   KC_I,    KC_O,   KC_P,         KC_BSPC,\
@@ -72,17 +84,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
     [_WIN] = LAYOUT( \
-     _______,                _______, _______, _______, _______, _______,                                   _______, _______, _______, _______, _______, _______, \
-     LT(_emacsMOVE, KC_TAB), _______, _______, _______, _______, _______,                                   _______, _______, _______, _______, _______, _______, \
-     _______,                _______, _______, _______, _______, _______,                                   _______, _______, _______, _______, _______, _______, \
-     KC_LCTL,                KC_LCTL,                   KC_LALT, _______, _______, LT(_vimMOVEwin, KC_ENT), _______, _______,                   KC_GRV,  LGUI(KC_R)\
+     _______,                _______, _______, _______, _______,        _______,                                   _______, _______, _______, _______, _______, _______, \
+     LT(_emacsMOVE, KC_TAB), _______, _______, _______, _______,        _______,                                   _______, _______, _______, _______, _______, _______, \
+     _______,                _______, _______, _______, _______,        _______,                                   _______, _______, _______, _______, _______, _______, \
+     KC_LCTL,                KC_LCTL,                   TD(TD_ALT_GUI), _______, _______, LT(_vimMOVEwin, KC_ENT), _______, _______,                   KC_GRV,  LGUI(KC_R)\
   ),
 
     [_SUMITOMO] = LAYOUT( \
-     _______,                _______, _______, _______, _______, _______,                                                   _______,                     _______, _______, _______, _______, _______, \
-     LT(_emacsMOVE, KC_TAB), _______, _______, _______, _______, _______,                                                   _______,                     _______, _______, _______, JP_SCLN, JP_QUOT, \
-     KC_LSFT,                _______, _______, _______, _______, _______,                                                           _______,                     _______, _______, _______, _______, _______, \
-     KC_LCTL,                KC_LCTL,                   KC_LALT, MO(_SUMITOMO_LOWER), LT(_SUMITOMO_RAISE, KC_TAB), _______, LT(_SUMITOMO_SHIFT, KC_SPC), _______,                   KC_GRV,  LGUI(KC_R)\
+     _______,                _______, _______, _______, _______,        _______,                                                   _______,                     _______, _______, _______, _______, _______, \
+     LT(_emacsMOVE, KC_TAB), _______, _______, _______, _______,        _______,                                                   _______,                     _______, _______, _______, JP_SCLN, JP_QUOT, \
+     KC_LSFT,                _______, _______, _______, _______,        _______,                                                   _______,                     _______, _______, _______, _______, _______, \
+     KC_LCTL,                KC_LCTL,                   TD(TD_ALT_GUI), MO(_SUMITOMO_LOWER), LT(_SUMITOMO_RAISE, KC_TAB), _______, LT(_SUMITOMO_SHIFT, KC_SPC), _______,                   KC_GRV,  LGUI(KC_R)\
   ),
 
 [_SUMITOMO_SHIFT] = LAYOUT( \
@@ -132,14 +144,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,               KC_HOME, KC_PGDOWN, KC_PGUP, KC_END,   KC_NO, KC_NO, \
      KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,               KC_LEFT, KC_DOWN,   KC_UP,   KC_RIGHT, KC_NO, KC_NO, \
      KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,               KC_BSPC, KC_DEL,    KC_NO,   KC_NO,    KC_NO, KC_NO, \
-     KC_LCTL,   KC_NO,             KC_LALT, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,                        KC_NO, KC_NO \
+     KC_LCTL, KC_LALT,             KC_LALT, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,                        KC_NO, KC_NO \
   ),
 
   [_vimMOVEwin] = LAYOUT( \
      KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,               KC_HOME, KC_PGDOWN, KC_PGUP, KC_END,   KC_NO, KC_NO, \
      KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,               KC_LEFT, KC_DOWN,   KC_UP,   KC_RIGHT, KC_NO, KC_NO, \
      KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,               KC_BSPC, KC_DEL,    KC_NO,   KC_NO,    KC_NO, KC_NO, \
-     KC_LCTL, KC_NO,               KC_LCTL, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,                        KC_NO, KC_NO \
+     KC_LCTL, KC_LCTL,             KC_LCTL, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,                        KC_NO, KC_NO \
   ),
 
   [_emacsMOVE] = LAYOUT( \
