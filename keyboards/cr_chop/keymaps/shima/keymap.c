@@ -22,6 +22,8 @@ enum layer_number {
     _WIN,
     _SUMITOMO,
     _SUMITOMO_SHIFT,
+    _DVORAK,
+    _DVORAK_JP,
     _LOWER,
     _SUMITOMO_LOWER,
     _RAISE,
@@ -91,10 +93,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
     [_SUMITOMO] = LAYOUT( \
-     _______,                _______, _______, _______, _______,        _______,                                                   _______,                     _______, _______, _______, _______, _______, \
-     LT(_emacsMOVE, KC_TAB), _______, _______, _______, _______,        _______,                                                   _______,                     _______, _______, _______, JP_SCLN, JP_QUOT, \
-     KC_LSFT,                _______, _______, _______, _______,        _______,                                                   _______,                     _______, _______, _______, _______, _______, \
-     KC_LCTL,                KC_LCTL,                   TD(TD_ALT_GUI), MO(_SUMITOMO_LOWER), LT(_SUMITOMO_RAISE, KC_TAB), _______, LT(_SUMITOMO_SHIFT, KC_SPC), _______,                   KC_GRV,  LGUI(KC_R)\
+     _______,                _______, _______, _______, _______,        _______,                                                                   _______,                     _______, _______, _______, _______, _______, \
+     LT(_emacsMOVE, KC_TAB), _______, _______, _______, _______,        _______,                                                                   _______,                     _______, _______, _______, JP_SCLN, JP_QUOT, \
+     KC_LSFT,                _______, _______, _______, _______,        _______,                                                                   _______,                     _______, _______, _______, _______, _______, \
+     KC_LCTL,                KC_LCTL,                   TD(TD_ALT_GUI), MO(_SUMITOMO_LOWER), LT(_SUMITOMO_RAISE, KC_TAB), LT(_vimMOVEwin, KC_ENT), LT(_SUMITOMO_SHIFT, KC_SPC), _______,                   KC_GRV,  LGUI(KC_R)\
   ),
 
 [_SUMITOMO_SHIFT] = LAYOUT( \
@@ -134,10 +136,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
   [_ADJUST] = LAYOUT( \
-    RESET,   TO(_QWERTY),  TO(_IOS),   TO(_WIN),   TO(_SUMITOMO), KC_NO,                   KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,\
-    RGB_TOG, RGB_HUI,     RGB_SAI,   RGB_VAI,    KC_NO,           KC_NO,                   KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,\
-    RGB_MOD, RGB_HUD,     RGB_SAD,   RGB_VAD,    KC_NO,           KC_NO,                   KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,\
-    RGBRST,   KC_NO,                             KC_LGUI,         LOWER, _______,   KC_ENT, RAISE, KC_RALT,               KC_NO, KC_NO\
+    RESET,   TO(_QWERTY), TO(_IOS),         TO(_WIN),   TO(_SUMITOMO), KC_NO,             KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,\
+    RGB_HUI, TO(_DVORAK), TO(_DVORAK_JP),   RGB_VAI,    KC_NO,           KC_NO,                   KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,\
+    RGB_MOD, RGB_HUD,     RGB_SAD,          RGB_VAD,    KC_NO,           KC_NO,                   KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,\
+    RGBRST,   KC_NO,                                    KC_LGUI,         LOWER, _______,   KC_ENT, RAISE, KC_RALT,               KC_NO, KC_NO\
   ),
 
   [_vimMOVE] = LAYOUT( \
@@ -160,6 +162,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_LSFT, KC_NO,   KC_NO, KC_NO,  KC_NO,    KC_LEFT,               KC_DOWN, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
      KC_LCTL, KC_NO,                  KC_NO,    KC_NO,   KC_NO, KC_NO, KC_NO,   KC_NO,               KC_NO, KC_NO \
   ),
+
+  [_DVORAK] = LAYOUT( \
+     KC_ESC,                 KC_QUOT, KC_COMM, KC_DOT, KC_P,    KC_Y,                                                 KC_F,           KC_G,   KC_C, KC_R, KC_L,         KC_BSPC, \
+     LT(_emacsMOVE, KC_TAB), KC_A,    KC_O,    KC_E,   KC_U,    KC_I,                                                 KC_D,           KC_H,   KC_T, KC_N, KC_S,         KC_SLSH, \
+     KC_LSFT,                KC_SCLN, KC_Q,    KC_J,   KC_K,    KC_X,                                                 KC_B,           KC_M,   KC_W, KC_V, KC_Z,         KC_ENT , \
+     KC_LGUI,                KC_LALT,                  KC_LGUI, MO(_LOWER), LT(_RAISE, KC_TAB), LT(_vimMOVE, KC_ENT), LSFT_T(KC_SPC), KC_APP,             LALT(KC_SPC), LGUI(KC_SPC) \
+  ),
+
+  [_DVORAK_JP] = LAYOUT( \
+     KC_ESC,                 KC_QUOT, KC_COMM, KC_DOT, KC_P,    KC_Y,                                                 KC_F,           KC_G,   KC_K, KC_R, KC_L,         KC_BSPC, \
+     LT(_emacsMOVE, KC_TAB), KC_A,    KC_O,    KC_E,   KC_U,    KC_I,                                                 KC_D,           KC_H,   KC_T, KC_N, KC_S,         KC_SLSH, \
+     KC_LSFT,                KC_SCLN, KC_Q,    KC_J,   KC_C,    KC_X,                                                 KC_B,           KC_M,   KC_W, KC_V, KC_Z,         KC_ENT , \
+     KC_LGUI,                KC_LALT,                  KC_LGUI, MO(_LOWER), LT(_RAISE, KC_TAB), LT(_vimMOVE, KC_ENT), LSFT_T(KC_SPC), KC_APP,             LALT(KC_SPC), LGUI(KC_SPC) \
+  )
 };
 
 int RGB_current_mode;
