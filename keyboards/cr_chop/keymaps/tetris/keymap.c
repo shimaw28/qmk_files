@@ -29,6 +29,7 @@ enum layer_number {
     _SUMITOMO_LOWER,
     _RAISE,
     _SUMITOMO_RAISE,
+    _TETRIS,
     _ADJUST,
     _vimMOVE,
     _emacsMOVE,
@@ -54,8 +55,9 @@ enum custom_keycodes {
 
   SW_MW, SW_EJ, MW_MOD1, MW_MOD2, MW_MOD3, MW_MOD4, MW_MOD5, MW_MOD6, //switch windows/mac
   SW_SCLN_CLN,
-  RAUNCHER, INPUT, ENT_MOVE, TAB_MOVE,
-  TO_EN, TO_JP
+  RAUNCHER, INPUT, ENT_MOVE,
+  TO_EN, TO_JP,
+  L4CC,
 };
 
 enum macro_keycodes {
@@ -102,21 +104,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_DVORAK_JP] = LAYOUT( \
      KC_ESC,                 DJ_QUOT, DJ_COMM, DJ_DOT, DJ_P,    DJ_Y,                                                DJ_F,           DJ_G,   DJ_K, DJ_R, DJ_L,         DJ_BSPC, \
-     TAB_MOVE, DJ_A,    DJ_O,    DJ_E,   DJ_U,    DJ_I,                                                DJ_D,           DJ_H,   DJ_T, DJ_N, DJ_S,         KC_SLSH, \
+     LT(_emacsMOVE, KC_TAB), DJ_A,    DJ_O,    DJ_E,   DJ_U,    DJ_I,                                                DJ_D,           DJ_H,   DJ_T, DJ_N, DJ_S,         KC_SLSH, \
      KC_LSFT,                DJ_SCLN, DJ_Q,    DJ_J,   DJ_C,    DJ_X,                                                DJ_B,           DJ_M,   DJ_W, DJ_XTU, DJ_Z,         KC_ENT , \
      LM(_QWERTY, MOD_LGUI),  LM(_QWERTY, MOD_LALT), LM(_QWERTY, MOD_LGUI), MO(_LOWER), LT(_RAISE, KC_TAB), ENT_MOVE, LSFT_T(KC_SPC), KC_APP,                  LALT(KC_SPC),   RAUNCHER\
   ),
 
   [_DVORAK_JP_WIN] = LAYOUT( \
      KC_ESC,                 DJ_QUOT, DJ_COMM, DJ_DOT, DJ_P,    DJ_Y,                                                DJ_F,           DJ_G,   DJ_K, DJ_R, DJ_L,         DJ_BSPC, \
-     TAB_MOVE, DJ_A,    DJ_O,    DJ_E,   DJ_U,    DJ_I,                                                DJ_D,           DJ_H,   DJ_T, DJ_N, DJ_S,         KC_SLSH, \
+     LT(_emacsMOVE, KC_TAB), DJ_A,    DJ_O,    DJ_E,   DJ_U,    DJ_I,                                                DJ_D,           DJ_H,   DJ_T, DJ_N, DJ_S,         KC_SLSH, \
      KC_LSFT,                DJ_SCLN, DJ_Q,    DJ_J,   DJ_C,    DJ_X,                                                DJ_B,           DJ_M,   DJ_W, DJ_XTU, DJ_Z,         KC_ENT , \
      LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LCTL),    TD(TD_ALT_GUI), _______, _______, _______, _______, _______,                   KC_GRV,    RAUNCHER\
   ),
 
   [_DVORAK_JP_SUM] = LAYOUT( \
      KC_ESC,                 DJ_QUOT, DJ_COMM, DJ_DOT, DJ_P,    DJ_Y,                                                DJ_F,           DJ_G,   DJ_K, DJ_R, DJ_L,         DJ_BSPC, \
-     TAB_MOVE, DJ_A,    DJ_O,    DJ_E,   DJ_U,    DJ_I,                                                DJ_D,           DJ_H,   DJ_T, DJ_N, DJ_S,         KC_SLSH, \
+     LT(_emacsMOVE, KC_TAB), DJ_A,    DJ_O,    DJ_E,   DJ_U,    DJ_I,                                                DJ_D,           DJ_H,   DJ_T, DJ_N, DJ_S,         KC_SLSH, \
      KC_LSFT,                DJ_SCLN, DJ_Q,    DJ_J,   DJ_C,    DJ_X,                                                DJ_B,           DJ_M,   DJ_W, DJ_XTU, DJ_Z,         KC_ENT , \
      LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LCTL),    TD(TD_ALT_GUI), MO(_SUMITOMO_LOWER), LT(_SUMITOMO_RAISE, KC_TAB), ENT_MOVE, LT(_SUMITOMO_SHIFT, KC_SPC), _______,  KC_GRV,    RAUNCHER\
   ),
@@ -163,10 +165,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LGUI(KC_TAB), KC_LGUI,                 KC_LGUI, MO(_ADJUST),  _______, KC_ENT, MO(_RAISE),   KC_RALT,                   KC_K,    KC_L\
   ),
 
+  [_TETRIS] = LAYOUT( \
+     KC_ESC,         KC_Q,  KC_W,  KC_E,  KC_R,    KC_T,                                                 KC_Y,           KC_U,   KC_I,    KC_O,   KC_P,         KC_BSPC,\
+     KC_TAB,  KC_A,  KC_S,  KC_D,  KC_F,  KC_G,                                                 KC_H,           KC_J,   KC_K,    KC_L,   KC_SCLN,      KC_QUOT,\
+     KC_LSFT,        L4CC,  KC_X,  KC_C,  KC_V,    KC_B,                                                 KC_N,           KC_M,   KC_COMM, KC_DOT, KC_SLSH,      KC_RSFT,\
+     KC_LGUI,        KC_LCTL,             KC_LALT, MO(_LOWER), LT(_RAISE, KC_TAB), LT(_vimMOVE, KC_ENT), KC_SPC, KC_APP,                  LALT(KC_SPC), LGUI(KC_SPC)\
+   ),
+
   [_ADJUST] = LAYOUT( \
     RESET,   TO(_DVORAK), TO(_DVORAK_WIN),  TO(_DVORAK_SUM),   KC_NO, KC_NO,                                KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,\
     RGB_HUI, TO(_QWERTY), KC_NO,           KC_NO,              KC_NO,           KC_NO,                   KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,\
-    SW_EJ,   KC_NO,       KC_NO,           KC_NO,              KC_NO,           KC_NO,                   KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,\
+    SW_EJ,   TO(_TETRIS),       KC_NO,           KC_NO,              KC_NO,           KC_NO,                   KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,\
     KC_NO,   KC_NO,                                    KC_LGUI,         MO(_LOWER), _______,   KC_ENT, MO(_RAISE), KC_RALT,               KC_NO, KC_NO\
   ),
 
@@ -284,7 +293,6 @@ void press_mod (uint16_t win_keycode, uint16_t mac_keycode, keyrecord_t *record)
 }
 
 static bool move_pressed = false;
-
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -600,6 +608,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
 
+
+    case L4CC:
+      if (record->event.pressed) {SEND_STRING("aaaa w");}
+      return false;
+
     case ENT_MOVE:
     //   参考: https://okapies.hateblo.jp/entry/2019/02/02/133953
       if (record->event.pressed) {
@@ -617,22 +630,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
       break;
 
-    case TAB_MOVE:
-    //   参考: https://okapies.hateblo.jp/entry/2019/02/02/133953
-      if (record->event.pressed) {
-        move_pressed = true;
-        dj_mode = 0; nn_status = 0;
-        layer_on(_emacsMOVE);
-      } else {
-        layer_off(_emacsMOVE);
-        if (move_pressed) {
-            register_code(KC_TAB);
-            unregister_code(KC_TAB);
-        }
-        move_pressed = false;
-      }
-      return false;
-      break;
 
     default:
       if (record->event.pressed) {
