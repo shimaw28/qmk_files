@@ -50,7 +50,7 @@ enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   DJ_A, DJ_B, DJ_C, DJ_D, DJ_E, DJ_F, DJ_G, DJ_H, DJ_I, DJ_J, DJ_K, DJ_L, DJ_M, DJ_N, DJ_O, DJ_P, DJ_Q, DJ_R, DJ_S, DJ_T, DJ_U, DJ_V, DJ_W, DJ_X, DJ_Y, DJ_Z,
   DJ_QUOT, DJ_COMM, DJ_DOT, DJ_SCLN,
-  DJ_XTU, DJ_CLEAR, DJ_BSPC, DJ_ENT, DJ_SPC,
+  DJ_XTU, DJ_CLEAR, DJ_BSPC, DJ_ENT, DJ_SAND, ENT_TO_DJ,
 
   SW_MW, SW_EJ, MW_MOD1, MW_MOD2, MW_MOD3, MW_MOD4, MW_MOD5, MW_MOD6, //switch windows/mac
   SW_SCLN_CLN,
@@ -73,17 +73,20 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_ALT_GUI] = ACTION_TAP_DANCE_DOUBLE(KC_LALT, KC_LGUI),
 };
 
+
 short int dj_mode = 0;
 bool nn_status = false;
 bool windows_mode = false;
 bool japanese_mode = false;
+static bool move_pressed = false;
+static short int dj_spc_mode = false;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DVORAK] = LAYOUT( \
      KC_ESC,                 KC_QUOT, KC_COMM, KC_DOT, KC_P,    KC_Y,                                                 KC_F,           KC_G,   KC_C, KC_R, KC_L,         KC_BSPC, \
      LT(_emacsMOVE, KC_TAB), KC_A,    KC_O,    KC_E,   KC_U,    KC_I,                                                 KC_D,           KC_H,   KC_T, KC_N, KC_S,         KC_SLSH, \
      KC_LSFT,                KC_SCLN, KC_Q,    KC_J,   KC_K,    KC_X,                                                 KC_B,           KC_M,   KC_W, KC_V, KC_Z,         KC_ENT , \
-     LM(_QWERTY, MOD_LGUI),  LM(_QWERTY, MOD_LALT), LM(_QWERTY, MOD_LGUI), MO(_LOWER), LT(_RAISE, KC_TAB), LT(_vimMOVE, KC_ENT), LSFT_T(KC_SPC), KC_APP,                LALT(KC_SPC), RAUNCHER\
+     LM(_QWERTY, MOD_LGUI),  LM(_QWERTY, MOD_LALT), LM(_QWERTY, MOD_LGUI), MO(_LOWER), LT(_RAISE, KC_TAB), ENT_TO_DJ, LSFT_T(KC_SPC), KC_APP,                LALT(KC_SPC), RAUNCHER\
   ),
 
   [_DVORAK_WIN] = LAYOUT( \
@@ -97,14 +100,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_ESC,                 JP_QUOT, KC_COMM, KC_DOT, KC_P,    KC_Y,                                                 KC_F,           KC_G,   KC_C, KC_R, KC_L,         KC_BSPC, \
      LT(_emacsMOVE, KC_TAB), KC_A,    KC_O,    KC_E,   KC_U,    KC_I,                                                 KC_D,           KC_H,   KC_T, KC_N, KC_S,         KC_SLSH, \
      KC_LSFT,                JP_SCLN, KC_Q,    KC_J,   KC_K,    KC_X,                                                 KC_B,           KC_M,   KC_W, KC_V, KC_Z,         KC_ENT , \
-     LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LCTL),    TD(TD_ALT_GUI), MO(_SUMITOMO_LOWER), LT(_SUMITOMO_RAISE, KC_TAB), LT(_vimMOVE, KC_ENT), LT(_SUMITOMO_SHIFT, KC_SPC), _______,  KC_GRV,    RAUNCHER\
+     LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LCTL),    TD(TD_ALT_GUI), MO(_SUMITOMO_LOWER), LT(_SUMITOMO_RAISE, KC_TAB), ENT_TO_DJ, LT(_SUMITOMO_SHIFT, KC_SPC), _______,  KC_GRV,    RAUNCHER\
   ),
 
   [_DVORAK_JP] = LAYOUT( \
      KC_ESC,                 DJ_QUOT, DJ_COMM, DJ_DOT, DJ_P,    DJ_Y,                                                DJ_F,           DJ_G,   DJ_K, DJ_R, DJ_L,         DJ_BSPC, \
      TAB_MOVE, DJ_A,    DJ_O,    DJ_E,   DJ_U,    DJ_I,                                                DJ_D,           DJ_H,   DJ_T, DJ_N, DJ_S,         KC_SLSH, \
      KC_LSFT,                DJ_SCLN, DJ_Q,    DJ_J,   DJ_C,    DJ_X,                                                DJ_B,           DJ_M,   DJ_W, DJ_XTU, DJ_Z,         KC_ENT , \
-     LM(_QWERTY, MOD_LGUI),  LM(_QWERTY, MOD_LALT), LM(_QWERTY, MOD_LGUI), MO(_LOWER), LT(_RAISE, KC_TAB), ENT_MOVE, LSFT_T(KC_SPC), KC_APP,                  LALT(KC_SPC),   RAUNCHER\
+     LM(_QWERTY, MOD_LGUI),  LM(_QWERTY, MOD_LALT), LM(_QWERTY, MOD_LGUI), MO(_LOWER), LT(_RAISE, KC_TAB), ENT_MOVE, DJ_SAND, KC_APP,                  LALT(KC_SPC),   RAUNCHER\
   ),
 
   [_DVORAK_JP_WIN] = LAYOUT( \
@@ -118,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_ESC,                 DJ_QUOT, DJ_COMM, DJ_DOT, DJ_P,    DJ_Y,                                                DJ_F,           DJ_G,   DJ_K, DJ_R, DJ_L,         DJ_BSPC, \
      TAB_MOVE, DJ_A,    DJ_O,    DJ_E,   DJ_U,    DJ_I,                                                DJ_D,           DJ_H,   DJ_T, DJ_N, DJ_S,         KC_SLSH, \
      KC_LSFT,                DJ_SCLN, DJ_Q,    DJ_J,   DJ_C,    DJ_X,                                                DJ_B,           DJ_M,   DJ_W, DJ_XTU, DJ_Z,         KC_ENT , \
-     LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LCTL),    TD(TD_ALT_GUI), MO(_SUMITOMO_LOWER), LT(_SUMITOMO_RAISE, KC_TAB), ENT_MOVE, LT(_SUMITOMO_SHIFT, KC_SPC), _______,  KC_GRV,    RAUNCHER\
+     LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LCTL),    TD(TD_ALT_GUI), MO(_SUMITOMO_LOWER), LT(_SUMITOMO_RAISE, KC_TAB), ENT_MOVE, DJ_SAND, _______,  KC_GRV,    RAUNCHER\
   ),
 
   [_SUMITOMO_SHIFT] = LAYOUT( \
@@ -282,8 +285,6 @@ void press_mod (uint16_t win_keycode, uint16_t mac_keycode, keyrecord_t *record)
         }
   }
 }
-
-static bool move_pressed = false;
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -475,30 +476,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         nn_status = 0;
         return false;
 
-   case DJ_SPC:
-        if (record->event.pressed) {
-            register_code(45);
-        } else {
-            unregister_code(45);
-        }
-        dj_mode = 0;
-        nn_status = 0;
-        return false;
 
     case DJ_ENT:
         if (record->event.pressed) {register_code(KC_ENT); unregister_code(KC_ENT); dj_mode = 0; }
         nn_status = 0;
         return false;
 
-    // case RGBRST:
-    //   #ifdef RGBLIGHT_ENABLE
-    //     if (record->event.pressed) {
-    //       eeconfig_update_rgblight_default();
-    //       rgblight_enable();
-    //       RGB_current_mode = rgblight_config.mode;
-    //     }
-    //   #endif
-    //   break;
     case SW_MW:
       if (record->event.pressed) {
           if (windows_mode) {windows_mode = false;} else {windows_mode = true;} }
@@ -633,6 +616,59 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+
+    case DJ_SAND:
+        if (record->event.pressed) {
+            move_pressed = true;
+            dj_mode = 0; nn_status = 0;
+            register_code(KC_LSFT);
+            if (layer_state_is(_DVORAK_JP)){
+                dj_spc_mode = true;
+                layer_move(_DVORAK);
+            } else if (layer_state_is(_DVORAK_JP_WIN)) {
+                dj_spc_mode = true;
+                layer_move(_DVORAK_WIN);
+            } else if (layer_state_is(_DVORAK_JP_SUM)) {
+                dj_spc_mode = true;
+                layer_move(_DVORAK_SUM);
+            }
+        } else {
+            unregister_code(KC_LSFT);
+            if (move_pressed) {
+                register_code(KC_SPC);
+                unregister_code(KC_SPC);
+            }
+            move_pressed = false;
+        }
+        return false;
+
+    case ENT_TO_DJ:
+        if (record->event.pressed) {
+            move_pressed = true;
+            layer_on(_vimMOVE);
+        } else {
+            layer_off(_vimMOVE);
+            if (move_pressed) {
+                register_code(KC_ENT);
+                unregister_code(KC_ENT);
+
+                if (dj_spc_mode) {
+                    if (layer_state_is(_DVORAK)) {
+                        dj_spc_mode = false;
+                        layer_move(_DVORAK_JP);
+                    } else if (layer_state_is(_DVORAK_WIN)) {
+                        dj_spc_mode = false;
+                        layer_move(_DVORAK_JP_WIN);
+                    } else if (layer_state_is(_DVORAK_SUM)) {
+                        dj_spc_mode = false;
+                        layer_move(_DVORAK_JP_SUM);
+                    }
+                }
+            }
+            move_pressed = false;
+        }
+        return false;
+
 
     default:
       if (record->event.pressed) {
