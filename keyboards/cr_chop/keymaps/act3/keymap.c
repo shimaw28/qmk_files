@@ -83,45 +83,45 @@ static short int dj_spc_mode = false;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_DVORAK] = LAYOUT( \
-     KC_ESC,                 KC_QUOT, KC_COMM, KC_DOT, KC_P,    KC_Y,                                                 KC_F,           KC_G,   KC_C, KC_R, KC_L,         KC_BSPC, \
-     LT(_emacsMOVE, KC_TAB), KC_A,    KC_O,    KC_E,   KC_U,    KC_I,                                                 KC_D,           KC_H,   KC_T, KC_N, KC_S,         KC_SLSH, \
-     KC_LSFT,                KC_SCLN, KC_Q,    KC_J,   KC_K,    KC_X,                                                 KC_B,           KC_M,   KC_W, KC_V, KC_Z,         KC_ENT , \
-     LM(_QWERTY, MOD_LGUI),  LM(_QWERTY, MOD_LALT), LM(_QWERTY, MOD_LGUI), MO(_LOWER), LT(_RAISE, KC_TAB), ENT_TO_DJ, LSFT_T(KC_SPC), KC_APP,                LALT(KC_SPC), RAUNCHER\
+     KC_ESC,                 KC_QUOT, KC_COMM, KC_DOT, KC_P,    KC_Y,                                                         KC_F,           KC_G,   KC_C, KC_R, KC_L,         KC_BSPC, \
+     LT(_emacsMOVE, KC_TAB), KC_A,    KC_O,    KC_E,   KC_U,    KC_I,                                                         KC_D,           KC_H,   KC_T, KC_N, KC_S,         KC_SLSH, \
+     KC_LSFT,                KC_SCLN, KC_Q,    KC_J,   KC_K,    KC_X,                                                         KC_B,           KC_M,   KC_W, KC_V, KC_Z,         KC_ENT , \
+     LM(_QWERTY, MOD_LGUI),  LM(_QWERTY, MOD_LALT), LM(_QWERTY, MOD_LGUI), LT(_LOWER, KC_SPC), LT(_RAISE, KC_TAB), ENT_TO_DJ, LSFT_T(KC_SPC), KC_APP,                LALT(KC_SPC), RAUNCHER\
   ),
 
   [_DVORAK_WIN] = LAYOUT( \
      KC_ESC,                 KC_QUOT, KC_COMM, KC_DOT, KC_P,    KC_Y,                                                 KC_F,           KC_G,   KC_C, KC_R, KC_L,         KC_BSPC, \
      LT(_emacsMOVE, KC_TAB), KC_A,    KC_O,    KC_E,   KC_U,    KC_I,                                                 KC_D,           KC_H,   KC_T, KC_N, KC_S,         KC_SLSH, \
      KC_LSFT,                KC_SCLN, KC_Q,    KC_J,   KC_K,    KC_X,                                                 KC_B,           KC_M,   KC_W, KC_V, KC_Z,         KC_ENT , \
-     LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LCTL),    TD(TD_ALT_GUI), _______, _______, _______, _______, _______,                   KC_GRV,    RAUNCHER\
+     LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LGUI),    LM(_QWERTY, MOD_LALT),  _______, _______, _______, _______, _______,                   KC_GRV,    RAUNCHER\
   ),
 
   [_DVORAK_SUM] = LAYOUT( \
      KC_ESC,                 JP_QUOT, KC_COMM, KC_DOT, KC_P,    KC_Y,                                                 KC_F,           KC_G,   KC_C, KC_R, KC_L,         KC_BSPC, \
      LT(_emacsMOVE, KC_TAB), KC_A,    KC_O,    KC_E,   KC_U,    KC_I,                                                 KC_D,           KC_H,   KC_T, KC_N, KC_S,         KC_SLSH, \
      KC_LSFT,                JP_SCLN, KC_Q,    KC_J,   KC_K,    KC_X,                                                 KC_B,           KC_M,   KC_W, KC_V, KC_Z,         KC_ENT , \
-     LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LCTL),    TD(TD_ALT_GUI), MO(_SUMITOMO_LOWER), LT(_SUMITOMO_RAISE, KC_TAB), ENT_TO_DJ, LT(_SUMITOMO_SHIFT, KC_SPC), _______,  KC_GRV,    RAUNCHER\
+     LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LGUI),    LM(_QWERTY, MOD_LALT), LT(_SUMITOMO_LOWER, KC_SPC), LT(_SUMITOMO_RAISE, KC_TAB), ENT_TO_DJ, LT(_SUMITOMO_SHIFT, KC_SPC), _______,  KC_GRV,    RAUNCHER\
   ),
 
   [_DVORAK_JP] = LAYOUT( \
      KC_ESC,                 DJ_QUOT, DJ_COMM, DJ_DOT, DJ_P,    DJ_Y,                                                DJ_F,           DJ_G,   DJ_K, DJ_R, DJ_L,         DJ_BSPC, \
      TAB_MOVE, DJ_A,    DJ_O,    DJ_E,   DJ_U,    DJ_I,                                                DJ_D,           DJ_H,   DJ_T, DJ_N, DJ_S,         KC_SLSH, \
      KC_LSFT,                DJ_SCLN, DJ_Q,    DJ_J,   DJ_C,    DJ_X,                                                DJ_B,           DJ_M,   DJ_W, DJ_XTU, DJ_Z,         KC_ENT , \
-     LM(_QWERTY, MOD_LGUI),  LM(_QWERTY, MOD_LALT), LM(_QWERTY, MOD_LGUI), MO(_LOWER), LT(_RAISE, KC_TAB), ENT_MOVE, DJ_SAND, KC_APP,                  LALT(KC_SPC),   RAUNCHER\
+     LM(_QWERTY, MOD_LGUI),  LM(_QWERTY, MOD_LALT), LM(_QWERTY, MOD_LGUI), LT(_LOWER, KC_SPC), LT(_RAISE, KC_TAB), ENT_MOVE, DJ_SAND, KC_APP,                  LALT(KC_SPC),   RAUNCHER\
   ),
 
   [_DVORAK_JP_WIN] = LAYOUT( \
      KC_ESC,                 DJ_QUOT, DJ_COMM, DJ_DOT, DJ_P,    DJ_Y,                                                DJ_F,           DJ_G,   DJ_K, DJ_R, DJ_L,         DJ_BSPC, \
      TAB_MOVE, DJ_A,    DJ_O,    DJ_E,   DJ_U,    DJ_I,                                                DJ_D,           DJ_H,   DJ_T, DJ_N, DJ_S,         KC_SLSH, \
      KC_LSFT,                DJ_SCLN, DJ_Q,    DJ_J,   DJ_C,    DJ_X,                                                DJ_B,           DJ_M,   DJ_W, DJ_XTU, DJ_Z,         KC_ENT , \
-     LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LCTL),    TD(TD_ALT_GUI), _______, _______, _______, _______, _______,                   KC_GRV,    RAUNCHER\
+     LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LGUI),    TD(TD_ALT_GUI), _______, _______, _______, _______, _______,                   KC_GRV,    RAUNCHER\
   ),
 
   [_DVORAK_JP_SUM] = LAYOUT( \
      KC_ESC,                 DJ_QUOT, DJ_COMM, DJ_DOT, DJ_P,    DJ_Y,                                                DJ_F,           DJ_G,   DJ_K, DJ_R, DJ_L,         DJ_BSPC, \
      TAB_MOVE, DJ_A,    DJ_O,    DJ_E,   DJ_U,    DJ_I,                                                DJ_D,           DJ_H,   DJ_T, DJ_N, DJ_S,         KC_SLSH, \
      KC_LSFT,                DJ_SCLN, DJ_Q,    DJ_J,   DJ_C,    DJ_X,                                                DJ_B,           DJ_M,   DJ_W, DJ_XTU, DJ_Z,         KC_ENT , \
-     LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LCTL),    TD(TD_ALT_GUI), MO(_SUMITOMO_LOWER), LT(_SUMITOMO_RAISE, KC_TAB), ENT_MOVE, DJ_SAND, _______,  KC_GRV,    RAUNCHER\
+     LM(_QWERTY, MOD_LCTL),  LM(_QWERTY, MOD_LGUI),    TD(TD_ALT_GUI), LT(_SUMITOMO_LOWER, KC_SPC), LT(_SUMITOMO_RAISE, KC_TAB), ENT_MOVE, DJ_SAND, _______,  KC_GRV,    RAUNCHER\
   ),
 
   [_SUMITOMO_SHIFT] = LAYOUT( \
@@ -134,8 +134,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT( \
      KC_ESC,         KC_Q,  KC_W,  KC_E,  KC_R,    KC_T,                                                 KC_Y,           KC_U,   KC_I,    KC_O,   KC_P,         KC_BSPC,\
      CTL_T(KC_TAB),  KC_A,  KC_S,  KC_D,  KC_F,    KC_G,                                                 KC_H,           KC_J,   KC_K,    KC_L,   KC_SCLN,      KC_QUOT,\
-     KC_LSFT,        KC_Z,  KC_X,  KC_C,  KC_V,    KC_B,                                                 KC_N,           KC_M,   KC_COMM, KC_DOT, KC_SLSH,      KC_RSFT,\
-     KC_LGUI,        KC_LCTL,             KC_LALT, MO(_LOWER), LT(_RAISE, KC_TAB), LT(_vimMOVE, KC_ENT), LSFT_T(KC_SPC), KC_APP,                  LALT(KC_SPC), LGUI(KC_SPC)\
+     KC_LSFT,        KC_Z,  KC_X,  KC_C,  KC_V,    KC_B,                                                 KC_N,           KC_M,   KC_COMM, KC_DOT, KC_SLSH,      KC_ENT,\
+     KC_LCTL,        KC_LGUI,             KC_LALT, MO(_LOWER), KC_SPC,             LT(_vimMOVE, KC_ENT), MO(_RAISE), KC_APP,                  LALT(KC_SPC), LGUI(KC_SPC)\
    ),
 
   [_LOWER] = LAYOUT( \
@@ -637,6 +637,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (move_pressed) {
                 register_code(KC_SPC);
                 unregister_code(KC_SPC);
+                if (layer_state_is(_DVORAK)) {
+                    dj_spc_mode = false;
+                    layer_move(_DVORAK_JP);
+                } else if (layer_state_is(_DVORAK_WIN)) {
+                    dj_spc_mode = false;
+                    layer_move(_DVORAK_JP_WIN);
+                } else if (layer_state_is(_DVORAK_SUM)) {
+                    dj_spc_mode = false;
+                    layer_move(_DVORAK_JP_SUM);
+                }
             }
             move_pressed = false;
         }
